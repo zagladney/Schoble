@@ -29,9 +29,14 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
+    private void initWidgets() {
+        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
+        monthYearText = findViewById(R.id.monthYearTV);
+    }
+
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = daysInMonth(selectedDate);
+        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
@@ -39,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
-    private ArrayList<String> daysInMonth(LocalDate date) {
-        ArrayList<String> daysInMonthList = new ArrayList<>();
+    private ArrayList<String> daysInMonthArray(LocalDate date) {
+        ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
 
         int daysInMonth = yearMonth.lengthOfMonth();
@@ -49,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
         for (int i = 1; i <= 42; i++) {
-            if (daysInMonth + dayOfWeek < i || i <= dayOfWeek) {
-                daysInMonthList.add("");
+            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
+                daysInMonthArray.add("");
             } else {
-                daysInMonthList.add(String.valueOf(i + dayOfWeek));
+                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
             }
         }
-        return daysInMonthList;
+        return daysInMonthArray;
     }
 
     private String monthYearFromDate(LocalDate date) {
@@ -63,18 +68,13 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         return date.format(formatter);
     }
 
-    private void initWidgets() {
-        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
-        monthYearText = findViewById(R.id.monthYearTV);
+    public void previousMonthAction(View view) {
+        selectedDate = selectedDate.minusMonths(1);
+        setMonthView();
     }
 
     public void nextMonthAction(View view) {
         selectedDate = selectedDate.plusMonths(1);
-        setMonthView();
-    }
-
-    public void previousMonthAction(View view) {
-        selectedDate = selectedDate.minusMonths(1);
         setMonthView();
     }
 
