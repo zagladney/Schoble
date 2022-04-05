@@ -1,8 +1,11 @@
 package com.example.uhsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,18 +26,35 @@ public class CalendarActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
     private static SimpleDateFormat compareDate = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
     public ArrayList<Event> eventsArray = new ArrayList<Event>();
-
+    public String today = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(new Date());
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        //Set up back button
+        Button backButton = (Button) findViewById(R.id.backCalendarButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backToMenu();
+            }
+        });
+
+
+        //Update today's text at the top
+        TextView dateDisplay = findViewById(R.id.dateDisplay);
+        dateDisplay.setText(today);
+
+        //Text view for the list of events for given days
         TextView eventList = findViewById(R.id.eventList);
 
+        //The action bar
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle(null);
 
+        //Initiate Calendar
         compactCalendar = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendar.setUseThreeLetterAbbreviation(true);
 
@@ -72,8 +92,10 @@ public class CalendarActivity extends AppCompatActivity {
                 actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
             }
         });
-
-
     }
 
+    private void backToMenu() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
 }
