@@ -29,7 +29,14 @@ public class MenuActivity extends AppCompatActivity {
         Button contactButton = (Button) findViewById(R.id.contactButton);
         contactButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { toActivity(ContactActivity.class);}
+            public void onClick(View view) { toActivity(ScheduleActivity.class);}
+        });
+
+        //Schedule page button
+        Button scheduleButton = (Button) findViewById(R.id.scheduleButton);
+        scheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { toActivity(ScheduleActivity.class);}
         });
     }
 
