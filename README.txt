@@ -1,0 +1,1 @@
+This app is intended to help UHS students contact their staff and look at school scheduling.

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ScheduleActivity">
 
+    <com.github.tlaabs.timetableview.TimetableView
+        android:id="@+id/timetable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scaleX=".6"
+        android:scaleY=".6"
+        app:column_count="6"
+        app:header_title="@array/my_header_title"
+        app:row_count="12"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/backScheduleButton"
         android:layout_width="wrap_content"
@@ -31,16 +43,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.095" />
 
-    <Button
-        android:id="@+id/addClassButton"
+    <TextView
+        android:id="@+id/dayCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#780E40"
-        android:text="Add Classes"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scheduleTitle"
-        app:layout_constraintVertical_bias="0.936" />
+        app:layout_constraintTop_toBottomOf="@+id/scheduleTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,8 @@ public class AddClassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_class);
 
-
+        classInput = findViewById(R.id.classNameInput);
+        teacherInput = findViewById(R.id.teacherNameInput);
 
         //Back Button
         Button backToScheduleButton = (Button) findViewById(R.id.backToScheduleButton);
