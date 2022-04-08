@@ -62,7 +62,14 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         });
 
-        //Read from data
+        //Add Class button
+        Button addButton = (Button) findViewById(R.id.addClassButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toActivity(AddClassActivity.class);
+            }
+        });
 
     }
 
